@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="row justify-content-center">
+            <div class="col-lg-12 bg-secondary justify-content-center" style="width: 100%;">
+                <h1 class="light">Weather Dashboard</h1>
+            </div>
+        </header>
+        <section class="row">
+            <div class="col-lg-4 bg-light mt-3 searchBox">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="citySearch" class="sr-only">Destination</label>
+                        <input type="text" class="form-control" id="cityInput" placeholder="Enter a City">
+                    </div>
+                    <button class="btn btn-primary mb-2" id="go"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <div class="col-lg-7 bg-primary m-3 result">
+            </div>
+            <div class="col-lg-4 bg-white m-3 history"></div>
+            <div class="col-lg-7 bg-warning m-3 forecast"></div>
+
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
