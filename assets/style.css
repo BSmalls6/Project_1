@@ -1,0 +1,22 @@
+* {
+    margin: 20px;
+}
+
+#cardback {
+    width: 7%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#cardback2 {
+    width: 7%
+}   
+
+#minBet {
+    width: 40px;
+}
+
+#chipI, #chipD {
+    width: 9%;
+}
