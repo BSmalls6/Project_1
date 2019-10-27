@@ -15,8 +15,9 @@
 
 #minBet {
     width: 40px;
+    height: 40px;
 }
 
 #chipI, #chipD {
-    width: 9%;
+    width: 7%;
 }
