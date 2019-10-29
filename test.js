@@ -1,8 +1,10 @@
 // Shuffle new deck
 var deckId = "";
-var playerHand = "";
-var dealerHand = ""
-var players = ["player", "dealer"];
+var players = ["player1", "dealer"];
+var playerHand = players[0];
+var dealerHand = players[1];
+var roundsDealt = 0;
+
 $("#go").on("click", function (event) {
     event.preventDefault();
 
@@ -28,26 +30,24 @@ $("#go").on("click", function (event) {
         }).then(function (draw) {
             var firstDeal = (draw.cards);
             // playerPile = 
-            // console.log(firstDeal.length);
+            console.log(firstDeal);
 
 
             // get cards loop:
             for (i = 0; i < firstDeal.length; i++) {
                 var curCard = firstDeal[i];
-                var numPlayers = players.length;
-                var roundsDealt = 0;
-                // console.log(curCard);
+                console.log(curCard);
                 // console.log(numPlayers);
                 dealCards();
 
             };
             function dealCards() {
-                while (roundsDealt < 1) {
-                    for (var j = 0; j < numPlayers; j++) {
-                        var curPlayer = numPlayers[j];
+                while (roundsDealt < 3) {
+                    for (var j = 0; j < players.length; j++) {
+                        var curPlayer = players[j];
                         // giveCardToPlayer(curPlayer, curCard);
                         console.log(curPlayer);
-                        console.log(curCard);
+                        // console.log(curCard);
                         addCards();
                         roundsDealt++;
 
@@ -56,7 +56,7 @@ $("#go").on("click", function (event) {
             };
 
             function addCards(curPlayer, curCard) {
-                console.log(curPlayer, curCard);
+                // console.log(curPlayer, curCard);
                 var pileAddURL = "https://deckofcardsapi.com/api/deck/" + deckId + "/pile/" + curPlayer + "/add/?cards=" + curCard;
                 // var playerHand = curPlayer;
                 // var dealerHand = "";
