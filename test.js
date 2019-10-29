@@ -1,7 +1,7 @@
 // Shuffle new deck
 var deckId = "";
-var playerPile = "";
-var dealerPile = ""
+var playerHand = "";
+var dealerHand = ""
 var players = ["player", "dealer"];
 $("#go").on("click", function (event) {
     event.preventDefault();
@@ -17,7 +17,6 @@ $("#go").on("click", function (event) {
         deckId = response.deck_id;
 
         initialHand();
-
     });
     function initialHand() {
 
@@ -29,20 +28,22 @@ $("#go").on("click", function (event) {
         }).then(function (draw) {
             var firstDeal = (draw.cards);
             // playerPile = 
-            console.log(firstDeal.length);
+            // console.log(firstDeal.length);
 
 
             // get cards loop:
             for (i = 0; i < firstDeal.length; i++) {
-              var curCard = firstDeal[i];
+                var curCard = firstDeal[i];
                 var numPlayers = players.length;
                 var roundsDealt = 0;
-            console.log(curCard);
-            console.log(numPlayers);
+                // console.log(curCard);
+                // console.log(numPlayers);
+                dealCards();
+
             };
-function dealCards {
+            function dealCards() {
                 while (roundsDealt < 1) {
-                    for (var j = 0; j < numPlayers; i++) {
+                    for (var j = 0; j < numPlayers; j++) {
                         var curPlayer = numPlayers[j];
                         // giveCardToPlayer(curPlayer, curCard);
                         console.log(curPlayer);
@@ -53,18 +54,30 @@ function dealCards {
                     }
                 }
             };
-            // function giveCardToPlayer(curPlayer, curCard) {
-            //     console.log(curPlayer, curCard);
-                //     // ajax to add card to pile for player
-                // https://deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/add/?cards=AS,2S
-            }
-            
-            
+
+            function addCards(curPlayer, curCard) {
+                console.log(curPlayer, curCard);
+                var pileAddURL = "https://deckofcardsapi.com/api/deck/" + deckId + "/pile/" + curPlayer + "/add/?cards=" + curCard;
+                // var playerHand = curPlayer;
+                // var dealerHand = "";
+
+                $.ajax({
+                    url: pileAddURL,
+                    method: "GET"
+                }).then(function (deal) {
+                    console.log(deal);
+
+                });
+
+            };
         });
+
+
     };
-
-
 });
+
+
+
 
 // function dealHand(players) {
 //     // ajax to pull next player.length * 2 cards from the deck\
