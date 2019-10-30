@@ -2,6 +2,14 @@
     margin: 20px;
 }
 
+.yellow.accent-4, .lime.accent-3, .right.red.accent-3 {
+    opacity: 0.5;
+}
+
+.right.red.accent-3 {
+    line-height: 0.4;
+}
+
 #cardback {
     width: 7%;
     position: relative;
@@ -18,13 +26,14 @@
     bottom: 0;
     position: absolute;
     margin-left: 40px;
-    margin-bottom: 100px;
+    margin-bottom: 120px;
     width: 60px;
     height: 40px;
     font-size: 25px;
+    opacity: 0.5;
 }
 
-#chipI {
+#chipIncrease {
     width: 7%;
     left: 0;
     bottom: 0;
@@ -32,10 +41,11 @@
     margin-left: 40px;
 }
 
-#chipD {
+#chipDecrease {
     width: 7%;
     left: 0;
     bottom:0;
     position: absolute;
     margin-left: 130px;
 }
+
