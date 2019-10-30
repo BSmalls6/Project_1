@@ -1,4 +1,5 @@
 var thisDeck = "";
+var cardName;
 getDeck();
 // user arrives at landing page
 // user click start button
@@ -18,20 +19,19 @@ function getDeck() {
     }).then(function (newDeck) {
         console.log(newDeck);
         // defines deck ID for the game to refference
-        thisDeck = newDeck.deck_id.trim();
+        thisDeck = newDeck.deck_id;
     })
 
 };
 //draw a card for player
-function drawCard(hand) {
+function drawCard() {
     $.ajax({
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
         method: "GET"
     }).then(function (drawnCard) {
         console.log(drawnCard);
         // grabs card code so that card can be assigned to proper hand
-        var cardName = drawnCard.code;
-        giveCard(cardName, hand);
+        cardName = drawnCard.code;
     })
 
 };
@@ -133,12 +133,18 @@ function chooseWinner() {
 // reset and do it asgain
 
 $("#startBtn").on("click", function () {
-    for (var i = 0; i < 1; i++) {
-        drawCard("player");
-        drawCard("dealer");
-    };
+    drawCard("player");
+    giveCard(cardName, "player");
+    drawCard("dealer");
+    giveCard(cardName, "dealer");
+    drawCard("player");
+    giveCard(cardName, "player");
+    drawCard("dealer");
+    giveCard(cardName, "dealer");
     getScore("player");
     placeBet();
 
 });
+
+
 
