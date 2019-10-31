@@ -17,7 +17,7 @@ function drawRandomCard(deck){
 //------------------------------------------------------------------------
 function start(){
 $("#start").click(function(){
-$
+
 console.log("Give dealer 2 cards");
 })
 //assign 2 cards each for dealer and player
@@ -76,6 +76,8 @@ function hitMe(){
         //document.getElementById("game-status").innerHTML = "Dealer Hand : BUSTED!";
     //}
 }
+document.getElementById("dealer-hand").innerHTML = ("<h4>Dealer Hand: </h4>"  + dealerHand);
+document.getElementById("dealer-hand-value").innerHTML = ("<h6>Dealer Hand Value: </h6>"  + getHandValue(dealerHand));
 //------------------------------------------------------------------------
 //$("#player-hand").append(drawRandomCard(deck));
 // document.getElementById("player-hand").innerHTML = ("<h4>Player Hand: </h4>"  + playerHand);
@@ -86,7 +88,18 @@ function hitMe(){
 function check(){
     if(getHandValue(dealerHand) > 21){
         document.getElementById('status').innerHTML = 'Dealer: ' + dealerHand + ' <b>Busted!</b>'
-        document.getElementById("dealer-hand").innerHTML = ("<h4>Dealer Hand: </h4>"  + dealerHand);
-    document.getElementById("dealer-hand-value").innerHTML = ("<h6>Dealer Hand Value: </h6>"  + getHandValue(dealerHand));
+        //document.getElementById("dealer-hand").innerHTML = ("<h4>Dealer Hand: </h4>"  + dealerHand);
+        document.getElementById("dealer-hand-value").innerHTML = ("<h6>Dealer Hand Value: </h6>"  + getHandValue(dealerHand));
+    end();
+    }
+}
+//-----------------------------------------------------------------------------------------------------------------
+function end(){
+    var winner = -1;
+    var score = 0;
+
+    if(getHandValue(dealerHand) > 21){
+        //clearInterval("Start New Game!");
+        console.log("New Game!")
     }
 }
