@@ -86,10 +86,14 @@ document.getElementById("dealer-hand-value").innerHTML = ("<h6>Dealer Hand Value
 
 //-----------------------------------------------------------------------------------------------------------------
 function check(){
-    if(getHandValue(dealerHand) > 21){
-        document.getElementById('status').innerHTML = 'Dealer: ' + dealerHand + ' <b>Busted!</b>'
+    if(getHandValue(dealerHand) < 17){
+        console.log("Dealer hand is less than 17, must hit!");
+        hitMe();
+
+    }else if(getHandValue(dealerHand) > 21){
+        document.getElementById('status').innerHTML = 'Dealer: ' + dealerHand + ' <b>Busted! => Dealer lost!</b>'
         //document.getElementById("dealer-hand").innerHTML = ("<h4>Dealer Hand: </h4>"  + dealerHand);
-        document.getElementById("dealer-hand-value").innerHTML = ("<h6>Dealer Hand Value: </h6>"  + getHandValue(dealerHand));
+        document.getElementById("dealer-hand-value").innerHTML = ("<h6>Dealer Hand Value : </h6>"  + getHandValue(dealerHand));
     end();
     }
 }
@@ -100,6 +104,8 @@ function end(){
 
     if(getHandValue(dealerHand) > 21){
         //clearInterval("Start New Game!");
+        console.log("Dealer Busted!")
         console.log("New Game!")
+        start();//Start new game
     }
 }
