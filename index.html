@@ -17,26 +17,48 @@
 
     <body background="assets/images/table.png" id="background"></body>
     <header>
-        <b><h2 class="yellow accent-4 center-align">Blackjack</h2></b>
+        <b>
+            <h2 class="yellow accent-4 center-align">Blackjack</h2>
+        </b>
     </header>
     <div class="left lime accent-3 make">
-        <b><p>Make a bet</p></b>
+        <b>
+            <p>Make a bet</p>
+        </b>
     </div>
     <!--<img class="center" src="assets/images/cardback.png" id="cardback">
     <img class="center" src="assets/images/cardback.png" id="cardback2"> -->
-    <div class="right red accent-3">
-        <b><p>Bet limit:</p></b>
-        <b><p>Min: $10</p></b>
-        <b><p>Max: $100</p></b>
+    <div class="right pink accent-3">
+        <b>
+            <p>Bet limit:</p>
+        </b>
+        <b>
+            <p>Min: $10</p>
+        </b>
+        <b>
+            <p>Max: $100</p>
+        </b>
     </div>
 
-        <div class="container">
-        <div class="orange lighten-5 center-align" id="minBet">10</div>
+    <div class="container">
+        <div class="orange lighten-5 center-align" id="minBet"></div>
         <div>
-        <img src="assets/images/chipIncrease.png" id="chipIncrease">
-        <img src="assets/images/chipDecrease.png" id="chipDecrease">
+            <img src="assets/images/chipIncrease.png" id="chipI">
+            <img src="assets/images/chipDecrease.png" id="chipD">
         </div>
-        </div>
+    </div>
+
+    <!--<div class="increase">
+        <img src="assets/images/chipIncrease.png" alt="increase" id="ipI">
+        <button class="btn" style="display: none;">Increase</button>
+    </div> -->
+    <button id="chipI"><img src="assets/images/chipDecrease.png" id="chipI"></button> -->
+    <div class="decrease">
+        <img src="assets/images/chipDecrease.png" alt="decrease" id="chipD">
+        <button class="btn" style="display: none;">Decrease</button>
+    </div>
+    <button id="chipD"><img src="assets/images/chipDecrease.png" id="chipD"></button>
+    </div>
 
     <!-- jQuery JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
