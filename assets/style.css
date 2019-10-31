@@ -6,6 +6,10 @@
     opacity: 0.5;
 }
 
+.lime.accent-3 {
+    line-height: 0.5;
+}
+
 .right.pink.accent-3 {
     line-height: 0.4;
     color: white;
