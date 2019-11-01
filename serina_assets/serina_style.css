@@ -1,0 +1,58 @@
+* {
+    margin: 20px;
+}
+
+.yellow.accent-4, .lime.accent-3, .right.pink.accent-3 {
+    opacity: 0.5;
+}
+
+.lime.accent-3 {
+    line-height: 0.5;
+}
+
+.right.pink.accent-3 {
+    line-height: 0.4;
+    color: white;
+}
+
+#cardback {
+    width: 7%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#cardback2 {
+    width: 7%
+}   
+
+#minBet {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    margin-left: 40px;
+    margin-bottom: 120px;
+    width: 60px;
+    height: 40px;
+    font-size: 25px;
+    opacity: 0.5;
+}
+
+#chipI {
+    width: 7%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    margin-left: 40px;
+}
+
+#chipD {
+    width: 7%;
+    left: 0;
+    bottom:0;
+    position: absolute;
+    margin-left: 130px;
+}
+
+
+
