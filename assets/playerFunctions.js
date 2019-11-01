@@ -168,11 +168,15 @@ function hitCards(){
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
         method: "GET"
     }).then(function (hitCard) {
-        cardName.push(hitCard.cards[0].code);
-        console.log(hitCard)
-        getPlayerScore(player)
+        var hitCard1 = hitCard.card.code;
+        playerHand.push(hitCard1);
+        console.log(hitCard1)
+        var phitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/"+hitCard1+".png")
+        phitCard.attr("class", "playerCard")
+    $(".playerCards").append(phitCard);
+    getPlayerScore("player")
     });
-}
+ }
 
 function splitPair() {
 
