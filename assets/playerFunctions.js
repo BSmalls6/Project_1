@@ -143,8 +143,21 @@ function whosHand(hand, curScore) {
         dealerScore = parseInt(dealerScore) + parseInt(curScore);
         console.log(dealerScore);
     }
-    placeBet();
+    
 };
+
+function splitPair() {
+
+};
+
+function insuranceCheck() {
+
+};
+
+function insuranceBet() {
+
+};
+
 //display score to player --> or at least show cards.
 // users bet is placed
 function placeBet() {
