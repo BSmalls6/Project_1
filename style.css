@@ -1,0 +1,83 @@
+* {
+    margin: 20px;
+    font-family: 'Petit Formal Script', cursive;
+}
+#background {
+    object-fit: cover;
+}
+
+#banner {
+    width: 50%;
+   margin-left: 25%;
+}
+
+#cardback {
+    width: 7%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#cardback2 {
+    width: 7%
+}   
+
+#play {
+    position: relative;
+    left: 23%;
+    margin-top: 15%;
+    width: 7%;
+}
+
+#minBet {
+    left: 59px;
+    bottom: 35px;
+    position: absolute;
+    margin-left: 40px;
+    margin-bottom: 100px;
+    width: 60px;
+    height: 40px;
+    font-size: 25px;
+}
+
+#chipI {
+    width: 7%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    margin-left: 40px;
+}
+
+#chipD {
+    width: 7%;
+    left: 0;
+    bottom:0;
+    position: absolute;
+    margin-left: 130px;
+}
+#placeBet {
+    position: relative;
+    left: -12%;
+    bottom: -144px;
+
+}
+
+.playerCards {
+    display: inline;
+    left: 25%;
+    bottom:5%;
+    position: absolute;
+    margin-left: 130px;
+}
+.actions {
+    display: inline;
+    left: 32%;
+    bottom:0;
+    position: absolute;
+    margin-left: 130px;
+    padding: 10px;
+}
+
+.playerCard {
+    width: 20%;
+}
