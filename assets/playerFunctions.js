@@ -1,3 +1,9 @@
+$(document).ready(function () {
+    $("#betting").hide();
+    $(".playerCards").hide();
+    $(".actions").hide();
+    $("#howTo").append("Click the Play Button to get Started")
+});
 var thisDeck = "";
 var cardName = [];
 var player = ["player", "dealer"]
@@ -23,7 +29,7 @@ function getDeck() {
         url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1",
         method: "GET"
     }).then(function (newDeck) {
-        console.log(newDeck);
+        // console.log(newDeck);
         // defines deck ID for the game to refference
         thisDeck = newDeck.deck_id;
     })
@@ -35,7 +41,7 @@ function drawCards(cardCount) {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=" + cardCount,
         method: "GET"
     }).then(function (drawnCard) {
-        console.log(drawnCard);
+        // console.log(drawnCard);
         // grabs card code so that card can be assigned to proper hand
         for (var i = 0; i < cardCount; i++) {
             cardName.push(drawnCard.cards[i].code);
@@ -49,6 +55,17 @@ function drawCards(cardCount) {
 
 };
 
+
+function showCards(card1, card2){
+    var pcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/"+card1+".png")
+    pcard1.attr("class", "playerCard")
+    var pcard2 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/"+card2+".png")
+    pcard2.attr("class", "playerCard")
+
+    $(".playerCards").prepend(pcard1, pcard2);
+    $(".playerCards").show();
+};
+
 function firstDeal() {
     // puts cards in players hand
     playerHand.push(cardName[0]);
@@ -57,9 +74,9 @@ function firstDeal() {
     dealerHand.push(cardName[1]);
     dealerHand.push(cardName[3]);
     // logs both arrays
-    console.log(playerHand);
-    console.log(dealerHand);
-
+    // console.log(playerHand);
+    // console.log(dealerHand);
+    showCards(playerHand[0], playerHand[1]);
     initPlayerCards(player[0], playerHand[0].trim(), playerHand[1].trim());
 };
 
@@ -69,7 +86,7 @@ function initPlayerCards(hand, card1, card2) {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
         method: "GET"
     }).then(function (cardDealt) {
-        console.log(cardDealt);
+        // console.log(cardDealt);
         initDealerCards(player[1], dealerHand[0].trim(), dealerHand[1].trim());
 
     })
@@ -80,7 +97,7 @@ function initDealerCards(hand, card1, card2) {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
         method: "GET"
     }).then(function (cardDealt) {
-        console.log(cardDealt);
+        // console.log(cardDealt);
         getPlayerScore("player");
     })
 };
@@ -146,6 +163,17 @@ function whosHand(hand, curScore) {
     
 };
 
+function hitCards(){
+    $.ajax({
+        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
+        method: "GET"
+    }).then(function (hitCard) {
+        cardName.push(hitCard.cards[0].code);
+        console.log(hitCard)
+        getPlayerScore(player)
+    });
+}
+
 function splitPair() {
 
 };
@@ -167,26 +195,16 @@ function placeBet() {
     }
 };
 // user chooses hit or stay
-function playerHit() {
-    var hitBtn = $("<a id='hit' class='waves-effect waves-light btn'>Hit!</a>");
-    var stayBtn = $("<a id='stay' class='waves-effect waves-light btn'>Stay</a>");
+
     //append buttons to player interface div
-    $("#hit").on("click", function () {
-        drawCard(player[0]);
-        getScore(player[1]);
-        if (playerScore > 21) {
-            alert("Bust! House wins " + playerBet);
-            playerBank = playerBank - playberBet;
-            confirm("Keep playing?");
-        }
-    })
+
     //draw a card
     //get value and image from card
     //append the info to cardDiv
     //append the new card to player hand
 
 
-};
+
 
 function playerStay() {
 
@@ -206,20 +224,39 @@ $("#placeBet").on("click", function () {
     drawCards(4);
     // function also sets hands
     // check score for hand
+    $("#betting").hide();
+    $("#howTo").hide();
+   
+    $(".actions").show();
 
 
 });
 
-$("#hit").on("click", function (event) {
-    event.preventDefault();
-    drawCard(player[0]);
-        getScore(player[1]);
-        if (playerScore > 21) {
-            alert("Bust! House wins " + playerBet);
-            playerBank = playerBank - playberBet;
-            confirm("Keep playing?");
+$("#hit").on("click", function () {
+    hitCards();
+    });
+
+    $("#play").on("click", function () {
+        $("#betting").show();
+        $("#play").hide();
+        $("#howTo").html("Use the chips to increase or decrease your bet, then click the 'place bet' button to start the round")
+    
+    });
+
+    $("#chipI").on("click", function (event) {
+        if (bet < 100) {
+            bet += 5;
+            $("#minBet").html("$" + bet);
         }
     });
+    $("#chipD").on("click", function (event) {
+        if (bet >= 15) {
+            bet -= 5;
+            $("#minBet").html("$" + bet);
+        };
+    });
+
+    
 
 
 
