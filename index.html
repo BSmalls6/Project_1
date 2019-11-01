@@ -1,4 +1,3 @@
-<!-- Bet/wager page-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,13 +18,13 @@
 
     <body background="assets/images/table.png" id="background"></body>
     <header>
-        <h2 class="yellow accent-4 center-align">Blackjack</h2>
+        <img class="center-align" id="banner" src="assets/images/banner.png">
     </header>
     <div class="left lime accent-3" id="instructions">
         <p id="howTo"></p>
     </div>
 
-    <button id="play" class="btn-floating btn-large">PLAY</button>
+    <button id="play" class="btn-floating btn-large waves-effect waves-light red">PLAY</button>
 
 
     <!--<img class="center" src="assets/images/cardback.png" id="cardback">
@@ -39,15 +38,15 @@
     <div class="container" id="betting">
         <div class="orange lighten-5 center-align" id="minBet">10</div>
         <div class="increase">
-            <img src="assets/images/chip.png" alt="increase" id="chipI">
-            <button class="btn" style="display: none;">Increase</button>
+            <img src="assets/images/chipIncrease.png" alt="increase" id="chipI">
+            <button class="btn" id="chipI" style="display: none;">Increase</button>
         </div>
         <!-- <button id="increase"><img src="assets/images/chip.png" id="chipI"></button> -->
         <div class="decrease">
-            <img src="assets/images/chip.png" alt="increase" id="chipD">
-            <button class="btn" style="display: none;">Decrease</button>
+            <img src="assets/images/chipDecrease.png" alt="increase" id="chipD">
+            <button class="btn" id="chipD" style="display: none;">Decrease</button>
         </div>
-        <button id="chipD"><img src="assets/images/chip.png" id="chipD"></button>
+    
         <button class="btn lg" id="placeBet">Place Bet</button>
     </div>
     <div class="container">
@@ -65,8 +64,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <!-- Code to the JavaScript File -->
-        <script src="assets/playerActions.js"></script>
-        <script src="playerFunctions.js"></script>
+        <!-- <script src="js/playerActions.js"></script> -->
+        <script src="assets/playerFunctions.js"></script>
 
 
 
