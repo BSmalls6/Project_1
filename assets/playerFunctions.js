@@ -29,7 +29,9 @@ function getDeck() {
         url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1",
         method: "GET"
     }).then(function (newDeck) {
-        // console.log(newDeck);
+        console.log("Game Deck");
+        console.log("--------------------");
+        console.log(newDeck);
         // defines deck ID for the game to refference
         thisDeck = newDeck.deck_id;
     })
@@ -41,7 +43,9 @@ function drawCards(cardCount) {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=" + cardCount,
         method: "GET"
     }).then(function (drawnCard) {
-        // console.log(drawnCard);
+        console.log("Draws four cards");
+        console.log("--------------------");
+        console.log(drawnCard);
         // grabs card code so that card can be assigned to proper hand
         for (var i = 0; i < cardCount; i++) {
             cardName.push(drawnCard.cards[i].code);
@@ -74,8 +78,12 @@ function firstDeal() {
     dealerHand.push(cardName[1]);
     dealerHand.push(cardName[3]);
     // logs both arrays
-    // console.log(playerHand);
-    // console.log(dealerHand);
+    console.log("Player hand array");
+    console.log("--------------------");
+    console.log(playerHand);
+    console.log("Dealer hand array");
+    console.log("--------------------");
+    console.log(dealerHand);
     showCards(playerHand[0], playerHand[1]);
     initPlayerCards(player[0], playerHand[0].trim(), playerHand[1].trim());
 };
@@ -86,7 +94,9 @@ function initPlayerCards(hand, card1, card2) {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
         method: "GET"
     }).then(function (cardDealt) {
-        // console.log(cardDealt);
+        console.log("cards added to player hand");
+        console.log("--------------------");
+        console.log(cardDealt);
         initDealerCards(player[1], dealerHand[0].trim(), dealerHand[1].trim());
 
     })
@@ -97,7 +107,9 @@ function initDealerCards(hand, card1, card2) {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
         method: "GET"
     }).then(function (cardDealt) {
-        // console.log(cardDealt);
+        console.log("cards added to dealer hand");
+        console.log("--------------------");
+        console.log(cardDealt);
         getPlayerScore("player");
     })
 };
@@ -152,12 +164,16 @@ function whosHand(hand, curScore) {
     if (hand === "player") {
         // adds score to reflect card(s) value
         playerScore = parseInt(playerScore) + parseInt(curScore);
+        console.log("Player Score");
+        console.log("--------------------");
         console.log(playerScore);
     }
     //determines dealers hand
     if (hand === "dealer") {
         // adds score to reflect card(s) value
         dealerScore = parseInt(dealerScore) + parseInt(curScore);
+        console.log("Dealer Score");
+        console.log("--------------------");
         console.log(dealerScore);
     }
     
@@ -170,6 +186,8 @@ function hitCards(){
     }).then(function (hitCard) {
         var hitCard1 = hitCard.card.code;
         playerHand.push(hitCard1);
+        console.log("Added player card");
+        console.log("--------------------");
         console.log(hitCard1)
         var phitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/"+hitCard1+".png")
         phitCard.attr("class", "playerCard")
