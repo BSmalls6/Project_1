@@ -47,8 +47,9 @@
     font-size: 25px;
     color: black;
 }
-#bank {
+#bank, #betLimit {
     width: 10%;
+    color: white;
 }
 
 
