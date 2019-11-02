@@ -1,5 +1,14 @@
 * {
     margin: 20px;
+    font-family: 'Petit Formal Script', cursive;
+}
+#background {
+    object-fit: cover;
+}
+
+#banner {
+    width: 50%;
+   margin-left: 25%;
 }
 
 #cardback {
@@ -21,8 +30,8 @@
 }
 
 #minBet {
-    left: 0;
-    bottom: 0;
+    left: 59px;
+    bottom: 35px;
     position: absolute;
     margin-left: 40px;
     margin-bottom: 100px;
@@ -30,6 +39,10 @@
     height: 40px;
     font-size: 25px;
 }
+#bank {
+    width: 100%;
+}
+
 
 #chipI {
     width: 7%;
@@ -72,42 +85,3 @@
 .playerCard {
     width: 20%;
 }
-
-.yellow.accent-4, .lime.accent-3, .right.pink.accent-3 {
-    opacity: 0.5;
- }
- .lime.accent-3 {
-    line-height: 0.5;
- }
- .right.pink.accent-3 {
-    line-height: 0.4;
-    color: white;
- }
- #background {
-    background-size: 100% auto;
- }
- #minBet {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    margin-left: 40px;
-    margin-bottom: 120px;
-    width: 60px;
-    height: 40px;
-    font-size: 25px;
-    opacity: 0.5;
- }
- @media screen and (max-width: 768px) {
-    .wrapper {
-      width: 100%;
-      padding: 20px;
-      margin: 20px;
-    }
- }
- @media screen and (max-width: 640px) {
-    .wrapper {
-      width: 100%;
-      padding: 20px;
-      margin: 0;
-    }
- }
