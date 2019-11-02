@@ -1,5 +1,8 @@
 $(document).ready(function () {
     $("#betting").hide();
+    $("#placeBet").hide();
+    $("#betLimit").hide();
+    $("#bank").hide();
     $(".playerCards").hide();
     $(".actions").hide();
     $("#howTo").append("Click the Play Button to get Started");
@@ -71,7 +74,7 @@ function showPlayerCards(card1, card2) {
 function showDealerCards(card1) {
     var dcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + card1 + ".png");
     dcard1.attr("class", "dealerCard")
-    var dcard2 = $("<img>").attr('src', "cardback.png");
+    var dcard2 = $("<img>").attr('src', "assets/images/cardback.jpeg");
     dcard2.attr("id", "facedown");
     dcard2.attr("class", "dealerCard");
 
@@ -266,6 +269,7 @@ function playerStay() {
 // dealer hits if under 17
 function dealerPlay() {
     getPlayerScore("dealer");
+    console.log(dealerScore);
     if (dealerScore < 17) {
         dealerHit();
     }
@@ -280,10 +284,12 @@ function compareScores() {
 
     if (playerScore > dealerScore){
         playerBank = (bet + (bet * 1.5));
+        console.log(playerBank);
         dealerBust();
     }
     else {
         playerBank = playerBank - bet;
+        console.log(playerBank);
         dealerBust();
     }
 
@@ -300,6 +306,7 @@ $("#placeBet").on("click", function () {
     // check score for hand
     $("#betting").hide();
     $("#howTo").hide();
+    $("#banner").hide();
 
     $(".actions").show();
     $("#bank").html($("#minBet"))
@@ -319,6 +326,9 @@ $("#stand").on("click", function () {
 
 $("#play").on("click", function () {
     $("#betting").show();
+    $("#placeBet").show();
+    $("#betLimit").show();
+    $("#bank").show();
     $("#play").hide();
     $("#howTo").html("Use the chips to increase or decrease your bet, then click the 'place bet' button to start the round")
 
