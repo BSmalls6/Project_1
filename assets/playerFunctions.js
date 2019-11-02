@@ -148,7 +148,6 @@ function compareScores() {
     }
 
 };
-<<<<<<< HEAD
 // reset and do it asgain
 
 $("#placeBet").on("click", function () {
@@ -201,8 +200,6 @@ $("#chipD").on("click", function (event) {
     };
 });
 
-=======
->>>>>>> 01afcc9b2e909c4fda67dd52bc34f29f5f98f31a
 
 
 
