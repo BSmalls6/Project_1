@@ -9,7 +9,7 @@
 
     <!-- Font Awesome CSS Icons (For cool glyphicons) & style.css sheet -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Petit+Formal+Script&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -17,9 +17,9 @@
 
 <body>
 
-    <body background="table.png" id="background"></body>
+    <body background="assets/images/table.png" id="background"></body>
     <header>
-        <img class="center-align" id="banner" src="banner.png">
+        <img class="center-align" id="banner" src="assets/images/banner.png">
     </header>
     <div class="left lime accent-3" id="instructions">
         <p id="howTo"></p>
@@ -39,18 +39,19 @@
     <div class="container" id="betting">
         <div class="orange lighten-5 center-align" id="minBet">10</div>
         <div class="increase">
-            <img src="chipIncrease.png" alt="increase" id="chipI">
+            <img src="assets/images/chipIncrease.png" alt="increase" id="chipI">
             <button class="btn" id="chipI" style="display: none;">Increase</button>
         </div>
-        <!-- <button id="increase"><img src="assets/images/chip.png" id="chipI"></button> -->
+        <button id="increase"><img src="assets/images/chip.png" id="chipI"></button>
         <div class="decrease">
-            <img src="chipDecrease.png" alt="increase" id="chipD">
+            <img src="assets/images/chipDecrease.png" alt="increase" id="chipD">
             <button class="btn" id="chipD" style="display: none;">Decrease</button>
         </div>
     
         <button class="btn lg" id="placeBet">Place Bet</button>
     </div>
     <div class="container">
+        <div class="dealerCards col l6"></div>
         <div class="playerCards col l6">
 
         </div>
@@ -71,7 +72,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <!-- Code to the JavaScript File -->
         <!-- <script src="js/playerActions.js"></script> -->
-        <script src="playerFunctions.js"></script>
+        <script src="assets/playerFunctions.js"></script>
 
 
 

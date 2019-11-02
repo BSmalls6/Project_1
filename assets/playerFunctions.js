@@ -71,7 +71,7 @@ function showPlayerCards(card1, card2) {
 function showDealerCards(card1) {
     var dcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + card1 + ".png");
     dcard1.attr("class", "dealerCard")
-    var dcard2 = $("<img>").attr('src', "cardback.png");
+    var dcard2 = $("<img>").attr('src', "assets/images/cardback.png");
     dcard2.attr("id", "facedown");
     dcard2.attr("class", "dealerCard");
 
@@ -266,6 +266,7 @@ function playerStay() {
 // dealer hits if under 17
 function dealerPlay() {
     getPlayerScore("dealer");
+    console.log(dealerScore);
     if (dealerScore < 17) {
         dealerHit();
     }
@@ -280,10 +281,12 @@ function compareScores() {
 
     if (playerScore > dealerScore){
         playerBank = (bet + (bet * 1.5));
+        console.log(playerBank);
         dealerBust();
     }
     else {
         playerBank = playerBank - bet;
+        console.log(playerBank);
         dealerBust();
     }
 
