@@ -29,7 +29,7 @@ function getDeck() {
         url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1",
         method: "GET"
     }).then(function (newDeck) {
-        // console.log(newDeck);
+        console.log(newDeck);
         // defines deck ID for the game to refference
         thisDeck = newDeck.deck_id;
     })
@@ -74,8 +74,8 @@ function firstDeal() {
     dealerHand.push(cardName[1]);
     dealerHand.push(cardName[3]);
     // logs both arrays
-    // console.log(playerHand);
-    // console.log(dealerHand);
+    console.log(playerHand);
+    console.log(dealerHand);
     showCards(playerHand[0], playerHand[1]);
     initPlayerCards(player[0], playerHand[0].trim(), playerHand[1].trim());
 };
@@ -86,7 +86,7 @@ function initPlayerCards(hand, card1, card2) {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
         method: "GET"
     }).then(function (cardDealt) {
-        // console.log(cardDealt);
+        console.log(cardDealt);
         initDealerCards(player[1], dealerHand[0].trim(), dealerHand[1].trim());
 
     })
@@ -97,7 +97,7 @@ function initDealerCards(hand, card1, card2) {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
         method: "GET"
     }).then(function (cardDealt) {
-        // console.log(cardDealt);
+        console.log(cardDealt);
         getPlayerScore("player");
     })
 };
@@ -122,7 +122,7 @@ function getPlayerScore(hand) {
             // determines facecard
             if (cardScore === "JACK" || cardScore === "QUEEN" || cardScore === "KING") {
                 cardScore = 10;
-                curScore = parseInt(curScore) += parseInt(cardScore);
+                curScore = parseInt(curScore) + parseInt(cardScore);
             }
             //determines ace, and ace value, mostly for an added card (hit)
             else if (cardScore === "ACE") {
@@ -168,7 +168,8 @@ function hitCards(){
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
         method: "GET"
     }).then(function (hitCard) {
-        var hitCard1 = hitCard.card.code;
+        console.log(hitCard);
+        var hitCard1 = hitCard.cards[0].code;
         playerHand.push(hitCard1);
         console.log(hitCard1)
         var phitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/"+hitCard1+".png")
