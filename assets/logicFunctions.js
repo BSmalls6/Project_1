@@ -1,3 +1,17 @@
+$(document).ready(function () {
+    $("#betting").hide();
+    $("#placeBet").hide();
+    $("#betLimit").hide();
+    $("#bank").hide();
+    $(".playerCards").hide();
+    $(".actions").hide();
+    $("#howTo").append("Click the Play Button to get Started");
+
+});
+
+//API call for new deck
+getDeck();
+
 // creates a new, shuffled deck to play this game with
 function getDeck() {
     $.ajax({
@@ -89,55 +103,81 @@ function initPlayerCards(hand, card1, card2) {
         console.log("player cards added to hand on API");
         console.log("------------------");
         console.log(cardDealt);
-        initDealerCards(player[1], dealerHand[0](), dealerHand[1]());
+        initDealerCards(player[1], dealerHand[0], dealerHand[1]);
 
     })
 };
 
-// assign cards to initial dealers hand
-function initDealerCards(hand, card1, card2) {
+function addHit(hand, card) {
     $.ajax({
-        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
+        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card,
         method: "GET"
     }).then(function (cardDealt) {
-        console.log("dealer cards added to hand on API");
+        if (hand === "player") {
+            console.log("player cards added to hand on API");
+        } else {
+            console.log("dealer cards added to hand on API");
+        }
         console.log("------------------");
         console.log(cardDealt);
-        getPlayerScore("player");
-    })
-};
 
-function dealerHit() {
-    $.ajax({
-        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
-        method: "GET"
-    }).then(function (dealhitCard) {
-        var hitCard2 = dealhitCard.cards[0].code;
-        dealerHand.push(hitCard2);
-        // console.log(hitCard1)
-
-        var dhitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + hitCard2 + ".png");
-        dhitCard.attr("class", "dealerCard");
-
-        $(".dealerCards").append(dhitCard);
-        getPlayerScore("dealer");
-        if (dealerScore > 21) {
-            setNewRound();
+        if (hand === "player" && playerScore > 21) {
+            alert("Player Bust!");
+            compareScores();
         }
-        else {
+        if (hand === "dealer" && dealerScore < 17) {
+            dealerHit();
+        }
+        if (hand === "dealer" && dealerScore >= 17) {
+            compareScores();
+        }
+        if (hand === "dealer" && dealerScore > 21) {
+            alert("Dealer Bust!");
             compareScores();
         }
     })
 };
 
-// dealer hits if under 17
-function dealerPlay() {
-    getPlayerScore("dealer");
-    console.log(dealerScore);
-    if (dealerScore < 17) {
-        dealerHit();
-    }
-    else {
-        compareScores();
-    }
-};
+    // assign cards to initial dealers hand
+    function initDealerCards(hand, card1, card2) {
+        $.ajax({
+            url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
+            method: "GET"
+        }).then(function (cardDealt) {
+            console.log("dealer cards added to hand on API");
+            console.log("------------------");
+            console.log(cardDealt);
+            getPlayerScore("player");
+        })
+    };
+
+    function dealerHit() {
+        $.ajax({
+            url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
+            method: "GET"
+        }).then(function (dealhitCard) {
+            var addDealerCard = dealhitCard.cards[0].code;
+            dealerHand.push(addDealerCard);
+            console.log("card drawn for dealer");
+            console.log("---------------------");
+            console.log(addDealerCard)
+
+            var dhitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + addDealerCard + ".png");
+            dhitCard.attr("class", "dealerCard");
+
+            $(".dealerCards").append(dhitCard);
+            addHit("dealer", addDealerCard);
+        })
+    };
+
+    // dealer hits if under 17
+    function dealerPlay() {
+        getPlayerScore("dealer");
+        console.log(dealerScore);
+        if (dealerScore < 17) {
+            dealerHit();
+        }
+        else {
+            compareScores();
+        }
+    };

@@ -22,7 +22,7 @@ $("#hit").on("click", function () {
 
 $("#stand").on("click", function () {
     dealerPlay();
-    playerStay();
+    compareScores();
 });
 
 $("#play").on("click", function () {
