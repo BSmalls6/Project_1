@@ -153,16 +153,6 @@ function compareScores() {
     if (dealerScore > 21) {
         $("#alert").append("Dealer Bust, You Win!");
         playerBank = (bet + (bet * 1.5));
-        console.log("Player Bank after Win");
-        console.log("--------------------");
-        console.log(playerBank);
-    }
-    if (playerScore === dealerScore){
-        $("#alert").append("Tie!");
-
-    }
-    if (playerScore > dealerScore){
-        playerBank = (bet + (bet * 1.5));
         console.log(playerBank);
        setNewRound();
     }
