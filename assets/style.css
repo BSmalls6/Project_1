@@ -68,10 +68,10 @@
     margin-left: 130px;
 }
 #placeBet {
-    position: relative;
-    left: -90%;
+    right: 59px;
     bottom: -144px;
-
+    position: relative;
+    margin-right: 40px;
 }
 
 .playerCards {

@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $("#betting").hide();
+    $("#placeBet").hide();
     $(".playerCards").hide();
     $(".actions").hide();
     $("#howTo").append("Click the Play Button to get Started");
@@ -323,6 +324,7 @@ $("#stand").on("click", function () {
 
 $("#play").on("click", function () {
     $("#betting").show();
+    $("#placeBet").show();
     $("#play").hide();
     $("#howTo").html("Use the chips to increase or decrease your bet, then click the 'place bet' button to start the round")
 
