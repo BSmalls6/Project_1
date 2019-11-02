@@ -22,7 +22,8 @@ $("#hit").on("click", function () {
 
 $("#stand").on("click", function () {
     getPlayerScore("dealer");
-    compareScores();
+    FlipDealerCard(dealerCards[0]);
+    
 });
 
 $("#play").on("click", function () {
