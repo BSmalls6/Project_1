@@ -244,7 +244,8 @@ function dealerBust() {
     $(".playerCards").hide();
     $(".actions").hide();
     // need to change this to an html popup
-    alert("You Win!");
+    //alert("You Win!");
+    $("#alert").append("You win!" + "<br>");
     thisDeck = "";
     cardName = [];
     playerHand = [];
@@ -307,7 +308,7 @@ $("#placeBet").on("click", function () {
     $("#betting").hide();
     $("#howTo").hide();
     $("#banner").hide();
-
+    
     $(".actions").show();
     $("#bank").html($("#minBet"))
 
