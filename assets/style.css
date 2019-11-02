@@ -8,11 +8,13 @@
 }
 
 #background {
-    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    background-repeat: no-repeat;
 }
 
 #banner {
-    width: 50%;
+   width: 50%;
    margin-left: 25%;
 }
 
@@ -95,3 +97,4 @@
 .dealerCards {
     margin-left: 25%;
 }
+
