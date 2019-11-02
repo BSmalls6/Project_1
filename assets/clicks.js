@@ -21,15 +21,14 @@ $("#hit").on("click", function () {
 });
 
 $("#stand").on("click", function () {
-    getPlayerScore("dealer");
-    FlipDealerCard(dealerCards[0]);
-    
+    dealerPlay();
+    compareScores();
 });
 
 $("#play").on("click", function () {
     $("#betting").show();
-    $("#betLimit").show();
     $("#placeBet").show();
+    $("#betLimit").show();
     $("#bank").show();
     $("#play").hide();
     $("#howTo").html("Use the chips to increase or decrease your bet, then click the 'place bet' button to start the round")
