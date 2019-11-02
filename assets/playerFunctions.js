@@ -82,9 +82,16 @@ function whosHand(hand, curScore) {
         dealerScore = 0;
         dealerScore = parseInt(dealerScore) + parseInt(curScore);
         console.log(dealerScore);
+    } else if (hand === "dealer" && curScore < 17) {
+        dealerHit();
     }
+    
 
 };
+
+function FlipDealerCard(card) {
+    $("#facedown").attr('src', "https://deckofcardsapi.com/static/img/" + card + ".png")
+}
 
 function hitCards() {
     $.ajax({
@@ -135,7 +142,16 @@ function compareScores() {
     getPlayerScore("player");
     getPlayerScore("dealer");
 
-    if (playerScore > dealerScore){
+
+    if (playerScore > 21) {
+        $("#alert").append("Player Bust, You Loose!");
+        playerBank = playerBank - bet;
+        console.log("Player Bank after loss");
+        console.log("--------------------");
+        console.log(playerBank);
+    }
+    if (dealerScore > 21) {
+        $("#alert").append("Dealer Bust, You Win!");
         playerBank = (bet + (bet * 1.5));
         console.log(playerBank);
        setNewRound();
