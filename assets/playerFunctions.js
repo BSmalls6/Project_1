@@ -134,8 +134,10 @@ function getPlayerScore(hand) {
         // determines if scoring players or dealers hand
         if (hand === "player") {
             var playHand = curHand.piles.player.cards;
+            var thisScore = playerScore;
         } else {
             var playHand = curHand.piles.dealer.cards;
+            var thisScore = dealerScore;
         }
         //loops through cards and adds their values together
         for (var i = 0; i < playHand.length; i++) {
@@ -147,7 +149,7 @@ function getPlayerScore(hand) {
             }
             //determines ace, and ace value, mostly for an added card (hit)
             else if (cardScore === "ACE") {
-                if (playerScore <= 10) {
+                if (thisScore <= 10) {
                     cardScore = 11;
                     curScore = parseInt(curScore) + parseInt(cardScore);
                 } else {
@@ -159,8 +161,12 @@ function getPlayerScore(hand) {
                 curScore = parseInt(curScore) + parseInt(cardScore);
             };
         }
+        if (thisScore > 21) {
+            alert("" + hand + "bust");
+        } else {
         // assigns score to appropriate hand
         whosHand(hand, curScore);
+        }
 
         // console.log(curScore);
     });
@@ -236,12 +242,11 @@ function dealerHit() {
 //append the info to cardDiv
 //append the new card to player hand
 
-function dealerBust() {
+function setNewRound() {
     $("#betting").show();
     $(".playerCards").hide();
     $(".actions").hide();
     // need to change this to an html popup
-    alert("You Win!");
     thisDeck = "";
     cardName = [];
     playerHand = [];
