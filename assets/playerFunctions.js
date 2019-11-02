@@ -71,7 +71,7 @@ function showPlayerCards(card1, card2) {
 function showDealerCards(card1) {
     var dcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + card1 + ".png");
     dcard1.attr("class", "dealerCard")
-    var dcard2 = $("<img>").attr('src', "assets/images/cardback.png");
+    var dcard2 = $("<img>").attr('src', "assets/images/cardback.jpeg");
     dcard2.attr("id", "facedown");
     dcard2.attr("class", "dealerCard");
 
@@ -303,6 +303,7 @@ $("#placeBet").on("click", function () {
     // check score for hand
     $("#betting").hide();
     $("#howTo").hide();
+    $("#banner").hide();
 
     $(".actions").show();
     $("#bank").html($("#minBet"))

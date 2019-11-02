@@ -67,7 +67,7 @@
 }
 #placeBet {
     position: relative;
-    left: -12%;
+    left: -90%;
     bottom: -144px;
 
 }
@@ -90,4 +90,8 @@
 
 .playerCard {
     width: 20%;
+}
+
+.dealerCards {
+    margin-left: 25%;
 }
