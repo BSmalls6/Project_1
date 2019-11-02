@@ -1,13 +1,3 @@
-$(document).ready(function () {
-    $("#betting").hide();
-    $("#placeBet").hide();
-    $("#betLimit").hide();
-    $("#bank").hide();
-    $(".playerCards").hide();
-    $(".actions").hide();
-    $("#howTo").append("Click the Play Button to get Started");
-    var bet = 10;
-});
 var thisDeck = "";
 var cardName = [];
 var player = ["player", "dealer"]
@@ -15,152 +5,59 @@ var playerHand = [];
 var playerCards = [];
 var dealerHand = [];
 var dealerCards = [];
-// user arrives at landing page
-// user click start button
 var playerScore = 0;
 var dealerScore = 0;
 var playerBank = 100;
 var playerBet;
 var bet = 10;
 
-getDeck();
-// ajax call for new deck
-
-
-// creates a new, shuffled deck to play this game with
-function getDeck() {
-    $.ajax({
-        url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1",
-        method: "GET"
-    }).then(function (newDeck) {
-        // console.log(newDeck);
-        // defines deck ID for the game to refference
-        thisDeck = newDeck.deck_id;
-    })
-
-};
-//draw a card for player
-function drawCards(cardCount) {
-    $.ajax({
-        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=" + cardCount,
-        method: "GET"
-    }).then(function (drawnCard) {
-        // console.log(drawnCard);
-        // grabs card code so that card can be assigned to proper hand
-        for (var i = 0; i < cardCount; i++) {
-            cardName.push(drawnCard.cards[i].code);
-        }
-        playerCards.push(drawnCard.cards[0].value);
-        playerCards.push(drawnCard.cards[2].value);
-        dealerCards.push(drawnCard.cards[1].value);
-        dealerCards.push(drawnCard.cards[3].value);
-        firstDeal();
-    })
-
-};
-
-
-function showPlayerCards(card1, card2) {
-    var pcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + card1 + ".png");
-    pcard1.attr("class", "playerCard")
-    var pcard2 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + card2 + ".png");
-    pcard2.attr("class", "playerCard")
-
-    $(".playerCards").prepend(pcard1, pcard2);
-    $(".playerCards").show();
-};
-
-
-function showDealerCards(card1) {
-    var dcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + card1 + ".png");
-    dcard1.attr("class", "dealerCard")
-    var dcard2 = $("<img>").attr('src', "assets/images/cardback.jpeg");
-    dcard2.attr("id", "facedown");
-    dcard2.attr("class", "dealerCard");
-
-    $(".dealerCards").prepend(dcard1, dcard2);
-    $(".dealerCards").show();
-};
-// function showDealerCards(card1, card2) {
-//     var dcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/"+card1+".png");
-//     dcard1
-// }
-
-
-
-function firstDeal() {
-    // puts cards in players hand
-    playerHand.push(cardName[0]);
-    playerHand.push(cardName[2]);
-    // puts cards in dealers hand
-    dealerHand.push(cardName[1]);
-    dealerHand.push(cardName[3]);
-    // logs both arrays
-    // console.log(playerHand);
-    // console.log(dealerHand);
-    showPlayerCards(playerHand[0], playerHand[1]);
-    showDealerCards(dealerHand[0]);
-    console.log(dealerHand[0]);
-    initPlayerCards(player[0], playerHand[0].trim(), playerHand[1].trim());
-};
-
-// assign card to initial users hand
-function initPlayerCards(hand, card1, card2) {
-    $.ajax({
-        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
-        method: "GET"
-    }).then(function (cardDealt) {
-        // console.log(cardDealt);
-        initDealerCards(player[1], dealerHand[0].trim(), dealerHand[1].trim());
-
-    })
-};
-// assign cards to initial dealers hand
-function initDealerCards(hand, card1, card2) {
-    $.ajax({
-        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/add/?cards=" + card1 + "," + card2,
-        method: "GET"
-    }).then(function (cardDealt) {
-        // console.log(cardDealt);
-        getPlayerScore("player");
-    })
-};
-// one more time
 //score players hand
 function getPlayerScore(hand) {
     $.ajax({
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/pile/" + hand + "/list/",
         method: "GET"
     }).then(function (curHand) {
+        console.log("hand being scored");
+        console.log("--------------------");
+        console.log(curHand);
         // keeps track of the current score of the hand
+        var thisScore;
         var curScore = 0;
         // determines if scoring players or dealers hand
         if (hand === "player") {
             var playHand = curHand.piles.player.cards;
+            thisScore = playerScore;
+            var cardScore = curHand.piles.player.cards;
         } else {
             var playHand = curHand.piles.dealer.cards;
+            thisScore = dealerScore;
+            var cardScore = curHand.piles.dealer.cards;
         }
         //loops through cards and adds their values together
         for (var i = 0; i < playHand.length; i++) {
-            var cardScore = playerCards[i].trim();
+            var thisCardScore = cardScore[i].value;
             // determines facecard
-            if (cardScore === "JACK" || cardScore === "QUEEN" || cardScore === "KING") {
-                cardScore = 10;
-                curScore = parseInt(curScore) += parseInt(cardScore);
+            if ( thisCardScore === "JACK" || thisCardScore === "QUEEN" || thisCardScore === "KING") {
+                thisCardScore = 10;
+                curScore = parseInt(curScore) + parseInt(thisCardScore);
             }
             //determines ace, and ace value, mostly for an added card (hit)
-            else if (cardScore === "ACE") {
-                if (playerScore <= 10) {
-                    cardScore = 11;
-                    curScore = parseInt(curScore) + parseInt(cardScore);
+            else if (thisCardScore === "ACE") {
+                if (thisScore <= 10) {
+                    thisCardScore = 11;
+                    curScore = parseInt(curScore) + parseInt(thisCardScore);
                 } else {
-                    cardScore = 1;
-                    curScore = parseInt(curScore) + parseInt(cardScore);
+                    thisCardScore = 1;
+                    curScore = parseInt(curScore) + parseInt(thisCardScore);
                 }
                 // determines numbered card
             } else {
-                curScore = parseInt(curScore) + parseInt(cardScore);
+                curScore = parseInt(curScore) + parseInt(thisCardScore);
             };
+        }
+        if (thisScore > 21) {
+            alert(""+ hand + " bust");
+            setNewRound();
         }
         // assigns score to appropriate hand
         whosHand(hand, curScore);
@@ -175,12 +72,14 @@ function whosHand(hand, curScore) {
     // determines players hand
     if (hand === "player") {
         // adds score to reflect card(s) value
+        playerScore = 0;
         playerScore = parseInt(playerScore) + parseInt(curScore);
         console.log(playerScore);
     }
     //determines dealers hand
     if (hand === "dealer") {
         // adds score to reflect card(s) value
+        dealerScore = 0;
         dealerScore = parseInt(dealerScore) + parseInt(curScore);
         console.log(dealerScore);
     }
@@ -192,56 +91,28 @@ function hitCards() {
         url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
         method: "GET"
     }).then(function (hitCard) {
-        var hitCard1 = hitCard.cards[0].code;
-        playerHand.push(hitCard1);
-        // console.log(hitCard1)
+        var addPlayerCard = hitCard.cards[0].code;
+        playerHand.push(addPlayerCard);
+        console.log("player card added to hand");
+        console.log("-------------------");
+        console.log(addPlayerCard);
 
-        var phitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + hitCard1 + ".png")
-        phitCard.attr("class", "playerCard")
+        var phitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + addPlayerCard + ".png");
+        phitCard.attr("class", "playerCard");
 
         $(".playerCards").append(phitCard);
-        getPlayerScore("player")
+        addHit("player", addPlayerCard);
+        getPlayerScore("player");
 
     });
 }
 
-function dealerHit() {
-    $.ajax({
-        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
-        method: "GET"
-    }).then(function (dealhitCard) {
-        var hitCard2 = dealhitCard.cards[0].code;
-        dealerHand.push(hitCard2);
-        // console.log(hitCard1)
-
-        var dhitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + hitCard2 + ".png");
-        dhitCard.attr("class", "dealerCard");
-
-        $(".dealerCards").append(dhitCard);
-        getPlayerScore("dealer");
-        if (dealerScore > 21) {
-            dealerBust();
-        }
-        else {
-            compareScores();
-        }
-    })
-};
-
-
-//display score to player --> or at least show cards.
-// users bet is placed
-
-//append buttons to player interface div
-
-//draw a card
-//get value and image from card
-//append the info to cardDiv
-//append the new card to player hand
-
-function dealerBust() {
-    $("#betting").show();
+function setNewRound() {
+    $("#play").show();
+    $(".dealerCards").hide();
+    $(".dealerCards").empty();
     $(".playerCards").hide();
+    $(".playerCards").empty();
     $(".actions").hide();
     // need to change this to an html popup
     //alert("You Win!");
@@ -260,24 +131,6 @@ function dealerBust() {
     bet = 10;
 };
 
-
-
-
-
-function playerStay() {
-    getPlayerScore("player");
-};
-// dealer hits if under 17
-function dealerPlay() {
-    getPlayerScore("dealer");
-    console.log(dealerScore);
-    if (dealerScore < 17) {
-        dealerHit();
-    }
-    else {
-        compareScores();
-    }
-};
 // score are compared and a winner is chosen.
 function compareScores() {
     getPlayerScore("player");
@@ -286,16 +139,16 @@ function compareScores() {
     if (playerScore > dealerScore){
         playerBank = (bet + (bet * 1.5));
         console.log(playerBank);
-        dealerBust();
+       setNewRound();
     }
     else {
         playerBank = playerBank - bet;
         console.log(playerBank);
-        dealerBust();
+        setNewRound();
     }
 
-
 };
+<<<<<<< HEAD
 // reset and do it asgain
 
 $("#placeBet").on("click", function () {
@@ -348,6 +201,8 @@ $("#chipD").on("click", function (event) {
     };
 });
 
+=======
+>>>>>>> 01afcc9b2e909c4fda67dd52bc34f29f5f98f31a
 
 
 
