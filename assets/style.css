@@ -2,6 +2,11 @@
     margin: 20px;
     font-family: 'Petit Formal Script', cursive;
 }
+
+.page-footer {
+    padding-top: 0;
+}
+
 #background {
     object-fit: cover;
 }
@@ -38,9 +43,10 @@
     width: 60px;
     height: 40px;
     font-size: 25px;
+    color: black;
 }
 #bank {
-    width: 100%;
+    width: 10%;
 }
 
 
