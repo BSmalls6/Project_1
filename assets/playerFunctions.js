@@ -56,12 +56,13 @@ function getPlayerScore(hand) {
             };
         }
         if (thisScore > 21) {
+            compareScores();
             alert(""+ hand + " bust");
             setNewRound();
-        }
+        } else {
         // assigns score to appropriate hand
         whosHand(hand, curScore);
-
+        }
         // console.log(curScore);
     });
 
@@ -115,7 +116,6 @@ function setNewRound() {
     $(".playerCards").empty();
     $(".actions").hide();
     // need to change this to an html popup
-    alert("You Win!");
     thisDeck = "";
     cardName = [];
     playerHand = [];
@@ -134,16 +134,21 @@ function setNewRound() {
 function compareScores() {
     getPlayerScore("player");
     getPlayerScore("dealer");
+    $("#facedown").attr('src', "https://deckofcardsapi.com/static/img/" + dealerHand[1] + ".png");
 
     if (playerScore > dealerScore){
         playerBank = (bet + (bet * 1.5));
+        console.log("Player Bank after Win");
+        console.log("--------------------");
         console.log(playerBank);
-       setNewRound();
+        
     }
     else {
         playerBank = playerBank - bet;
+        console.log("Player Bank after loss");
+        console.log("--------------------");
         console.log(playerBank);
-        setNewRound();
+        
     }
 
 };

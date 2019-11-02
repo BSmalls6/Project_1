@@ -125,6 +125,9 @@ function addHit(hand, card) {
             alert("Player Bust!");
             compareScores();
         }
+        if (hand === "player" && playerScore <= 21) {
+            getPlayerScore("player");
+        }
         if (hand === "dealer" && dealerScore < 17) {
             dealerHit();
         }
@@ -167,17 +170,26 @@ function addHit(hand, card) {
 
             $(".dealerCards").append(dhitCard);
             addHit("dealer", addDealerCard);
+            
         })
     };
 
     // dealer hits if under 17
-    function dealerPlay() {
-        getPlayerScore("dealer");
-        console.log(dealerScore);
-        if (dealerScore < 17) {
-            dealerHit();
-        }
-        else {
-            compareScores();
-        }
-    };
+    // function dealerPlay() {
+    //     getPlayerScore("dealer");
+    //     console.log("dealerplay() : Dealer Score");
+    //     console.log("----------------");
+    //     console.log(dealerScore);
+    //     if (dealerScore < 17) {
+    //         dealerHit();
+    //     }
+    //     else {
+    //         compareScores();
+    //     }
+    // };
+
+    function displayResults(message) {
+        $("#howTo").show();
+        $("howTo").text(message);
+        
+    }

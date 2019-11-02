@@ -21,14 +21,14 @@ $("#hit").on("click", function () {
 });
 
 $("#stand").on("click", function () {
-    dealerPlay();
+    getPlayerScore("dealer");
     compareScores();
 });
 
 $("#play").on("click", function () {
     $("#betting").show();
-    $("#placeBet").show();
     $("#betLimit").show();
+    $("#placeBet").show();
     $("#bank").show();
     $("#play").hide();
     $("#howTo").html("Use the chips to increase or decrease your bet, then click the 'place bet' button to start the round")
