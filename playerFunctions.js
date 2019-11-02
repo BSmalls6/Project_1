@@ -67,6 +67,17 @@ function showPlayerCards(card1, card2) {
     $(".playerCards").show();
 };
 
+
+function showDealerCards(card1) {
+    var dcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + card1 + ".png");
+    dcard1.attr("class", "dealerCard")
+    var dcard2 = $("<img>").attr('src', "cardback.png");
+    dcard2.attr("id", "facedown");
+    dcard2.attr("class", "dealerCard");
+
+    $(".dealerCards").prepend(dcard1, dcard2);
+    $(".dealerCards").show();
+};
 // function showDealerCards(card1, card2) {
 //     var dcard1 = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/"+card1+".png");
 //     dcard1
@@ -85,6 +96,8 @@ function firstDeal() {
     // console.log(playerHand);
     // console.log(dealerHand);
     showPlayerCards(playerHand[0], playerHand[1]);
+    showDealerCards(dealerHand[0]);
+    console.log(dealerHand[0]);
     initPlayerCards(player[0], playerHand[0].trim(), playerHand[1].trim());
 };
 
@@ -149,7 +162,7 @@ function getPlayerScore(hand) {
         // assigns score to appropriate hand
         whosHand(hand, curScore);
 
-        console.log(curScore);
+        // console.log(curScore);
     });
 
 };
@@ -178,7 +191,7 @@ function hitCards() {
     }).then(function (hitCard) {
         var hitCard1 = hitCard.cards[0].code;
         playerHand.push(hitCard1);
-        console.log(hitCard1)
+        // console.log(hitCard1)
 
         var phitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + hitCard1 + ".png")
         phitCard.attr("class", "playerCard")
@@ -189,27 +202,32 @@ function hitCards() {
     });
 }
 
-function splitPair() {
+function dealerHit() {
+    $.ajax({
+        url: "https://deckofcardsapi.com/api/deck/" + thisDeck + "/draw/?count=1",
+        method: "GET"
+    }).then(function (dealhitCard) {
+        var hitCard2 = dealhitCard.cards[0].code;
+        dealerHand.push(hitCard2);
+        // console.log(hitCard1)
 
+        var dhitCard = $("<img>").attr('src', "https://deckofcardsapi.com/static/img/" + hitCard2 + ".png");
+        dhitCard.attr("class", "dealerCard");
+
+        $(".dealerCards").append(dhitCard);
+        getPlayerScore("dealer");
+        if (dealerScore > 21) {
+            dealerBust();
+        }
+        else {
+            compareScores();
+        }
+    })
 };
 
-function insuranceCheck() {
-
-};
-
-function insuranceBet() {
-
-};
 
 //display score to player --> or at least show cards.
 // users bet is placed
-function placeBet() {
-    playerBet = prompt("What's your bet??");
-    if (playerBet > playerBank) {
-        alert("You don't have enough money. Please place a lower bet.");
-    }
-};
-// user chooses hit or stay
 
 //append buttons to player interface div
 
@@ -218,18 +236,57 @@ function placeBet() {
 //append the info to cardDiv
 //append the new card to player hand
 
+function dealerBust() {
+    $("#betting").show();
+    $(".playerCards").hide();
+    $(".actions").hide();
+    // need to change this to an html popup
+    alert("You Win!");
+    thisDeck = "";
+    cardName = [];
+    playerHand = [];
+    playerCards = [];
+    dealerHand = [];
+    dealerCards = [];
+    // user arrives at landing page
+    // user click start button
+    playerScore = 0;
+    dealerScore = 0;
+    playerBet;
+    bet = 10;
+};
+
+
 
 
 
 function playerStay() {
-
+    getPlayerScore("player");
 };
 // dealer hits if under 17
 function dealerPlay() {
-
+    getPlayerScore("dealer");
+    if (dealerScore < 17) {
+        dealerHit();
+    }
+    else {
+        compareScores();
+    }
 };
 // score are compared and a winner is chosen.
-function chooseWinner() {
+function compareScores() {
+    getPlayerScore("player");
+    getPlayerScore("dealer");
+
+    if (playerScore > dealerScore){
+        playerBank = (bet + (bet * 1.5));
+        dealerBust();
+    }
+    else {
+        playerBank = playerBank - bet;
+        dealerBust();
+    }
+
 
 };
 // reset and do it asgain
@@ -245,6 +302,7 @@ $("#placeBet").on("click", function () {
     $("#howTo").hide();
 
     $(".actions").show();
+    $("#bank").html($("#minBet"))
 
 
 
@@ -252,6 +310,11 @@ $("#placeBet").on("click", function () {
 
 $("#hit").on("click", function () {
     hitCards();
+});
+
+$("#stand").on("click", function () {
+    dealerPlay();
+    playerStay();
 });
 
 $("#play").on("click", function () {

@@ -39,6 +39,10 @@
     height: 40px;
     font-size: 25px;
 }
+#bank {
+    width: 100%;
+}
+
 
 #chipI {
     width: 7%;
