@@ -56,7 +56,7 @@ function getPlayerScore(hand) {
             };
         }
         if (thisScore > 21) {
-            alert(""+ hand + " bust");
+            $("#alert").append(""+ hand + " bust");
             setNewRound();
         }
         // assigns score to appropriate hand
@@ -122,7 +122,7 @@ function setNewRound() {
     $(".playerCards").empty();
     $(".actions").hide();
     // need to change this to an html popup
-    alert("You Win!");
+    $("#alert").append("You Win!");
     thisDeck = "";
     cardName = [];
     playerHand = [];
@@ -141,6 +141,7 @@ function setNewRound() {
 function compareScores() {
     getPlayerScore("player");
     getPlayerScore("dealer");
+    $("#placeBet").hide();
 
 
     if (playerScore > 21) {

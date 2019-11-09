@@ -122,7 +122,7 @@ function addHit(hand, card) {
         console.log(cardDealt);
 
         if (hand === "player" && playerScore > 21) {
-            alert("Player Bust!");
+            $("#alert").append("Player Bust!");
             compareScores();
         }
         if (hand === "dealer" && dealerScore < 17) {
@@ -132,7 +132,7 @@ function addHit(hand, card) {
             compareScores();
         }
         if (hand === "dealer" && dealerScore > 21) {
-            alert("Dealer Bust!");
+            $("#alert").append("Dealer Bust!");
             compareScores();
         }
     })
