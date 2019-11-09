@@ -82,9 +82,16 @@ function whosHand(hand, curScore) {
         dealerScore = 0;
         dealerScore = parseInt(dealerScore) + parseInt(curScore);
         console.log(dealerScore);
+    } else if (hand === "dealer" && curScore < 17) {
+        dealerHit();
     }
+    
 
 };
+
+function FlipDealerCard(card) {
+    $("#facedown").attr('src', "https://deckofcardsapi.com/static/img/" + card + ".png")
+}
 
 function hitCards() {
     $.ajax({
@@ -115,8 +122,7 @@ function setNewRound() {
     $(".playerCards").empty();
     $(".actions").hide();
     // need to change this to an html popup
-    //alert("You Win!");
-    $("#alert").append("You win!" + "<br>");
+    alert("You Win!");
     thisDeck = "";
     cardName = [];
     playerHand = [];
@@ -136,7 +142,16 @@ function compareScores() {
     getPlayerScore("player");
     getPlayerScore("dealer");
 
-    if (playerScore > dealerScore){
+
+    if (playerScore > 21) {
+        $("#alert").append("Player Bust, You Loose!");
+        playerBank = playerBank - bet;
+        console.log("Player Bank after loss");
+        console.log("--------------------");
+        console.log(playerBank);
+    }
+    if (dealerScore > 21) {
+        $("#alert").append("Dealer Bust, You Win!");
         playerBank = (bet + (bet * 1.5));
         console.log(playerBank);
        setNewRound();
@@ -148,58 +163,6 @@ function compareScores() {
     }
 
 };
-// reset and do it asgain
-
-$("#placeBet").on("click", function () {
-    //draw cards for setup
-    var audio = new Audio('assets/shuffle.wav');
-    audio.play();
-    drawCards(4);
-    // function also sets hands
-    // check score for hand
-    $("#betting").hide();
-    $("#howTo").hide();
-    $("#banner").hide();
-    
-    $(".actions").show();
-    $("#bank").html($("#minBet"))
-
-
-
-});
-
-$("#hit").on("click", function () {
-    hitCards();
-});
-
-$("#stand").on("click", function () {
-    dealerPlay();
-    playerStay();
-});
-
-$("#play").on("click", function () {
-    $("#betting").show();
-    $("#placeBet").show();
-    $("#betLimit").show();
-    $("#bank").show();
-    $("#play").hide();
-    $("#howTo").html("Use the chips to increase or decrease your bet, then click the 'place bet' button to start the round")
-
-});
-
-$("#chipI").on("click", function (event) {
-    if (bet < 100) {
-        bet += 5;
-        $("#minBet").html("$" + bet);
-    }
-});
-$("#chipD").on("click", function (event) {
-    if (bet >= 15) {
-        bet -= 5;
-        $("#minBet").html("$" + bet);
-    };
-});
-
 
 
 

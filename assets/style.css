@@ -70,7 +70,7 @@
 }
 #placeBet {
     position: relative;
-    left: -50%;
+    left: 50%;
     bottom: -144px; 
 }
 
